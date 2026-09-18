@@ -44,20 +44,31 @@ public_users.get('/isbn/:isbn',function (req, res) {
   
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
-    let author = req.params.author;
-    let matchingBooks = Object.keys(books)
-        .filter(key => books[key].author === author)
-        .map(key => books[key]);
-    return res.send(matchingBooks);
+    const author = req.params.author.trim().toLowerCase();
+    const matchingBooks = Object.values(books).filter(
+        book => book.author.toLowerCase() === author
+    );
+    if (matchingBooks.length === 0) {
+        return res.status(404).json({
+            message: "No books found for this author"
+        });
+    }
+    return res.json(matchingBooks);
 });
 
 // Get all books based on title
+// Get all books based on title
 public_users.get('/title/:title', function (req, res) {
-    let title = req.params.title;
-    let matchingBooks = Object.keys(books)
-        .filter(key => books[key].title === title)
-        .map(key => books[key]);
-    return res.send(matchingBooks);
+    const title = req.params.title.trim().toLowerCase();
+    const matchingBooks = Object.values(books).filter(
+        book => book.title.toLowerCase() === title
+    );
+    if (matchingBooks.length === 0) {
+        return res.status(404).json({
+            message: "No books found with this title"
+        });
+    }
+    return res.json(matchingBooks);
 });
 
 //  Get book review
