@@ -91,4 +91,17 @@ async function getBookByISBNAsync(isbn) {
         throw error;
     }
 }
+
+async function getBooksByAuthorAsync(author) {
+    try {
+        const response = await axios.get(
+            `http://localhost:5000/author/${encodeURIComponent(author)}`
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+}
 module.exports.general = public_users;
