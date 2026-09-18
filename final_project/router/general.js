@@ -104,4 +104,17 @@ async function getBooksByAuthorAsync(author) {
         throw error;
     }
 }
+
+async function getBooksByTitleAsync(title) {
+    try {
+        const response = await axios.get(
+            `http://localhost:5000/title/${encodeURIComponent(title)}`
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+}
 module.exports.general = public_users;
