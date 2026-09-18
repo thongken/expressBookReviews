@@ -78,4 +78,17 @@ async function getAllBooksAsync() {
         throw error;
     }
 }
+
+async function getBookByISBNAsync(isbn) {
+    try {
+        const response = await axios.get(
+            `http://localhost:5000/isbn/${isbn}`
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+}
 module.exports.general = public_users;
