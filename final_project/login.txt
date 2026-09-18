@@ -1,0 +1,2 @@
+curl -X POST "http://localhost:5000/customer/login?username=nhung&password=123456" -c cookie.txt
+User successfully logged in
